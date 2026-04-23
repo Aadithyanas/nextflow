@@ -1,0 +1,46 @@
+# Nextflow Test Workflow Notes
+
+## New Workflow
+
+Use the `New` button in the top bar to reset the canvas to the starter workflow:
+
+Trigger -> Gemini -> Output
+
+## JSONPlaceholder Test Workflow
+
+Use the `Test API` button in the top bar to load a workflow that does not need Gemini:
+
+Trigger -> JSONPlaceholder API -> State -> Output
+
+The API node uses:
+
+```txt
+POST https://jsonplaceholder.typicode.com/posts
+```
+
+Request body:
+
+```json
+{
+  "title": "Workflow API test",
+  "body": "{{input}}",
+  "userId": 1
+}
+```
+
+Expected result:
+
+- JSONPlaceholder returns a fake created post response.
+- The State node saves the response under `jsonPlaceholderResponse`.
+- The Output node displays the final result in JSON mode.
+
+## Run History
+
+Each workflow run adds a recent history item with:
+
+- Workflow name
+- Completed or failed status
+- Timestamp
+- Short run message
+
+The history is kept in the current browser session and shows the latest 8 runs.
