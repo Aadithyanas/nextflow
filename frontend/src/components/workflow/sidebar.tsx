@@ -10,11 +10,12 @@ interface SidebarProps {
   collapsed: boolean;
   onAddNode: (type: WorkflowNodeType) => void;
   onToggle: () => void;
+  className?: string;
 }
 
 const NODE_TYPES: WorkflowNodeType[] = ["trigger", "ai", "api", "state", "output"];
 
-export function Sidebar({ collapsed, onAddNode, onToggle }: SidebarProps) {
+export function Sidebar({ collapsed, onAddNode, onToggle, className = "" }: SidebarProps) {
   function handleDragStart(event: React.DragEvent<HTMLButtonElement>, type: WorkflowNodeType) {
     event.dataTransfer.effectAllowed = "move";
     event.dataTransfer.setData("application/reactflow-nodetype", type);
@@ -22,9 +23,9 @@ export function Sidebar({ collapsed, onAddNode, onToggle }: SidebarProps) {
 
   return (
     <aside
-      className={`glass-panel flex h-full flex-col gap-3 rounded-[30px] p-3 shadow-glow transition-all duration-300 ${
+      className={`glass-panel flex flex-col gap-3 rounded-[30px] p-3 shadow-glow transition-all duration-300 ${
         collapsed ? "w-full" : "w-full"
-      }`}
+      } ${className}`}
     >
       {/* Header */}
       <div className="flex items-center justify-between gap-2 px-2 pt-1">
@@ -42,7 +43,8 @@ export function Sidebar({ collapsed, onAddNode, onToggle }: SidebarProps) {
                 Nodes
               </p>
               <h2 className="mt-0.5 whitespace-nowrap text-sm font-semibold text-slate-900">
-                Drag to canvas
+                <span className="hidden sm:inline">Drag to canvas</span>
+                <span className="sm:hidden">Tap to add node</span>
               </h2>
             </motion.div>
           )}
@@ -126,7 +128,8 @@ export function Sidebar({ collapsed, onAddNode, onToggle }: SidebarProps) {
             exit={{ opacity: 0 }}
             className="rounded-2xl bg-slate-50 px-3 py-2.5 text-[11px] leading-5 text-slate-400"
           >
-            💡 Click or drag nodes onto the canvas to build your workflow.
+            <span className="hidden sm:inline">💡 Click or drag nodes onto the canvas to build your workflow.</span>
+            <span className="sm:hidden">💡 Tap a node to add it to the canvas.</span>
           </motion.div>
         )}
       </AnimatePresence>

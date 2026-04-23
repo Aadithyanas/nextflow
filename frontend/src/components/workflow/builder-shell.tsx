@@ -2,6 +2,10 @@
 
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import {
+  PlusIcon,
+  ArrowPathIcon,
+} from "@heroicons/react/24/outline";
+import {
   addEdge,
   Background,
   BackgroundVariant,
@@ -18,6 +22,7 @@ import {
   useReactFlow,
   MarkerType,
 } from "@xyflow/react";
+import { motion, AnimatePresence } from "framer-motion";
 import toast from "react-hot-toast";
 
 import { api } from "@/lib/api";
@@ -60,7 +65,7 @@ interface BuilderShellProps {
 
 /** Inner component has access to useReactFlow (must be inside ReactFlowProvider) */
 function BuilderInner({ token, user }: BuilderShellProps) {
-  const { screenToFlowPosition } = useReactFlow();
+  const { screenToFlowPosition, fitView } = useReactFlow();
   const reactFlowWrapper = useRef<HTMLDivElement>(null);
 
   const starter = useMemo(() => defaultWorkflow(), []);
@@ -82,6 +87,7 @@ function BuilderInner({ token, user }: BuilderShellProps) {
   const [isDeleting, setIsDeleting] = useState(false);
   const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
   const [isInspectorOpen, setIsInspectorOpen] = useState(false);
+  const [isMobileLibraryOpen, setIsMobileLibraryOpen] = useState(false);
 
   /* ── Load workflows on mount ─────────────────────────────────── */
   useEffect(() => {
@@ -90,6 +96,42 @@ function BuilderInner({ token, user }: BuilderShellProps) {
       .then(setWorkflows)
       .catch((err: Error) => toast.error(err.message));
   }, [token]);
+
+  // Initial fit view when component is ready
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      window.dispatchEvent(new Event('resize')); 
+      fitView({ padding: 0.2, duration: 800 });
+    }, 800);
+    const wakeUp = setTimeout(() => {
+      window.dispatchEvent(new Event('resize')); 
+    }, 2000);
+    return () => {
+      clearTimeout(timer);
+      clearTimeout(wakeUp);
+    };
+  }, [fitView]);
+
+  // Refit when nodes are loaded or workflow changes
+  useEffect(() => {
+    if (nodes.length > 0) {
+      const timer = setTimeout(() => {
+        window.dispatchEvent(new Event('resize')); 
+        fitView({ padding: 0.2, duration: 800 });
+      }, 500);
+      return () => clearTimeout(timer);
+    }
+  }, [currentWorkflowId, nodes.length, fitView]); 
+
+  // Force one more fitView after a few seconds just in case of slow mobile rendering
+  useEffect(() => {
+    if (nodes.length > 0) {
+      const timer = setTimeout(() => {
+        fitView({ padding: 0.2, duration: 400 });
+      }, 4000);
+      return () => clearTimeout(timer);
+    }
+  }, [fitView, nodes.length]);
 
   /* ── Derived ─────────────────────────────────────────────────── */
   const selectedNode = useMemo(
@@ -160,6 +202,10 @@ function BuilderInner({ token, user }: BuilderShellProps) {
     setNodes((cur) => [...cur, node]);
     setSelectedNodeId(node.id);
     setIsInspectorOpen(true);
+    setIsMobileLibraryOpen(false); // Close library after adding on mobile
+    
+    // Auto-center the view after a brief delay to allow the new node to render
+    setTimeout(() => fitView({ padding: 0.2, duration: 400 }), 50);
   }
 
   /** Drop a node dragged from sidebar onto the canvas */
@@ -390,40 +436,51 @@ function BuilderInner({ token, user }: BuilderShellProps) {
 
         {/* Middle row: sidebar + canvas */}
         <div
-          className={`grid min-h-0 flex-1 gap-3 ${
+          className={`flex min-h-0 flex-1 flex-col gap-3 xl:grid ${
             isSidebarCollapsed
               ? "xl:grid-cols-[68px_minmax(0,1fr)]"
               : "xl:grid-cols-[240px_minmax(0,1fr)]"
           }`}
           style={{ minHeight: "520px" }}
         >
-          {/* Sidebar */}
-          <Sidebar
-            collapsed={isSidebarCollapsed}
-            onAddNode={handleAddNode}
-            onToggle={() => setIsSidebarCollapsed((v) => !v)}
-          />
-
-          {/* Canvas */}
+          {/* Canvas - Order 1 on mobile, Order 2 on desktop */}
           <div
             ref={reactFlowWrapper}
-            className="glass-panel min-h-0 overflow-hidden rounded-[28px] shadow-glow"
+            className="glass-panel order-1 h-[550px] w-full flex-1 overflow-hidden rounded-[28px] shadow-glow xl:order-2 xl:h-auto xl:min-h-0"
           >
             {/* Canvas header */}
             <div className="flex items-center justify-between border-b border-slate-200/70 px-5 py-3.5">
-              <div>
-                <p className="text-[10px] font-semibold uppercase tracking-[0.26em] text-slate-400">
-                  Canvas
-                </p>
-                <h2 className="mt-0.5 text-sm font-semibold text-slate-900">
-                  {workflowName || "Untitled workflow"}
-                </h2>
+              <div className="flex items-center gap-3">
+                <div className="flex gap-1.5 xl:hidden">
+                  <button
+                    onClick={() => setIsMobileLibraryOpen(true)}
+                    title="Add Node"
+                    className="flex h-9 w-9 items-center justify-center rounded-xl bg-slate-900 text-white shadow-lg"
+                  >
+                    <PlusIcon className="h-4 w-4" />
+                  </button>
+                  <button
+                    onClick={() => fitView({ padding: 0.2, duration: 400 })}
+                    title="Recenter"
+                    className="flex h-9 w-9 items-center justify-center rounded-xl border border-slate-200 bg-white text-slate-600 shadow-sm"
+                  >
+                    <ArrowPathIcon className="h-4 w-4" />
+                  </button>
+                </div>
+                <div>
+                  <p className="text-[10px] font-semibold uppercase tracking-[0.26em] text-slate-400">
+                    Canvas
+                  </p>
+                  <h2 className="mt-0.5 text-sm font-semibold text-slate-900">
+                    {workflowName || "Untitled workflow"}
+                  </h2>
+                </div>
               </div>
               <div className="flex items-center gap-2.5">
                 <div className="rounded-xl bg-slate-100 px-3 py-1.5 text-xs font-medium text-slate-500">
                   {nodes.length} nodes · {edges.length} edges
                 </div>
-                <div className="text-xs text-slate-400 hidden sm:block">
+                <div className="hidden text-xs text-slate-400 sm:block">
                   Click node to edit · Drag to move · Click edge to remove
                 </div>
               </div>
@@ -431,17 +488,20 @@ function BuilderInner({ token, user }: BuilderShellProps) {
 
             {/* Flow canvas */}
             <div
-              className="h-[calc(100%-57px)]"
+              className="relative w-full"
+              style={{ height: "calc(100% - 65px)", minHeight: "400px" }}
               onDrop={handleDrop}
               onDragOver={handleDragOver}
             >
               <ReactFlow
+                key={currentWorkflowId || "new-workflow"}
                 nodes={nodes}
                 edges={edges}
                 nodeTypes={nodeTypes}
                 onNodesChange={onNodesChange}
                 onEdgesChange={onEdgesChange}
                 onConnect={handleConnect}
+                style={{ width: "100%", height: "100%", minHeight: "400px", background: "#fcfdfe" }}
                 onEdgeClick={(_event, edge) => {
                   setEdges((cur) => cur.filter((e) => e.id !== edge.id));
                   toast.success("Connection removed");
@@ -458,8 +518,8 @@ function BuilderInner({ token, user }: BuilderShellProps) {
                 <Background
                   variant={BackgroundVariant.Dots}
                   gap={24}
-                  size={1.2}
-                  color="rgba(148, 163, 184, 0.25)"
+                  size={1.5}
+                  color="rgba(100, 116, 139, 0.4)"
                 />
                 <Controls
                   showInteractive={false}
@@ -474,10 +534,47 @@ function BuilderInner({ token, user }: BuilderShellProps) {
               </ReactFlow>
             </div>
           </div>
+
+          {/* Sidebar - Desktop */}
+          <Sidebar
+            collapsed={isSidebarCollapsed}
+            onAddNode={handleAddNode}
+            onToggle={() => setIsSidebarCollapsed((v) => !v)}
+            className="hidden xl:order-1 xl:flex"
+          />
+
+          {/* Sidebar Overlay - Mobile */}
+          <AnimatePresence>
+            {isMobileLibraryOpen && (
+              <>
+                <motion.div
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  onClick={() => setIsMobileLibraryOpen(false)}
+                  className="fixed inset-0 z-[100] bg-slate-900/40 backdrop-blur-sm xl:hidden"
+                />
+                <motion.div
+                  initial={{ x: "-100%" }}
+                  animate={{ x: 0 }}
+                  exit={{ x: "-100%" }}
+                  transition={{ type: "spring", damping: 25, stiffness: 200 }}
+                  className="fixed inset-y-0 left-0 z-[101] w-[280px] p-4 xl:hidden"
+                >
+                  <Sidebar
+                    collapsed={false}
+                    onAddNode={handleAddNode}
+                    onToggle={() => setIsMobileLibraryOpen(false)}
+                    className="h-full shadow-2xl"
+                  />
+                </motion.div>
+              </>
+            )}
+          </AnimatePresence>
         </div>
 
         {/* Execution panel */}
-        <div className="glass-panel min-h-[300px] rounded-[28px] p-5 shadow-glow">
+        <div className="glass-panel order-3 min-h-[300px] rounded-[28px] p-5 shadow-glow">
           <ExecutionPanel
             result={executionResult}
             history={executionHistory}
