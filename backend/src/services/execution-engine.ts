@@ -79,11 +79,11 @@ async function executeNode(
     }
     case "api": {
       const config = node.data as unknown as ApiNodeConfig;
+      const hasBody = ["POST", "PUT", "PATCH"].includes(config.method);
       const response = await fetch(config.url, {
         method: config.method,
         headers: config.headers,
-        body:
-          config.method === "POST"
+        body: hasBody
             ? JSON.stringify(
                 safeJsonParse(interpolateTemplate(config.bodyTemplate, templateContext))
               )

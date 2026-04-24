@@ -24,7 +24,7 @@ export interface AiNodeConfig {
 export interface ApiNodeConfig {
   label: string;
   url: string;
-  method: "GET" | "POST";
+  method: "GET" | "POST" | "PUT" | "PATCH" | "DELETE";
   headers: Record<string, string>;
   bodyTemplate: string;
 }
