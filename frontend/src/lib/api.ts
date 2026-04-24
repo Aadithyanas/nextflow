@@ -1,17 +1,25 @@
 import { AuthResponse, ExecutionResponse, WorkflowRecord } from "./types";
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL ?? "https://nextflow-k2bf.onrender.com/api";
+const API_URL = (process.env.NEXT_PUBLIC_API_URL && process.env.NEXT_PUBLIC_API_URL !== "") 
+  ? process.env.NEXT_PUBLIC_API_URL 
+  : "https://nextflow-k2bf.onrender.com/api";
+
+let _token: string | null = null;
 
 async function request<T>(
   path: string,
   options: RequestInit = {},
   token?: string | null
 ): Promise<T> {
-  const response = await fetch(`${API_URL}${path}`, {
+  const authToken = token ?? _token;
+  const url = `${API_URL}${path}`;
+  console.log(`[API Request] ${options.method ?? "GET"} ${url}`);
+
+  const response = await fetch(url, {
     ...options,
     headers: {
       "Content-Type": "application/json",
-      ...(token ? { Authorization: `Bearer ${token}` } : {}),
+      ...(authToken ? { Authorization: `Bearer ${authToken}` } : {}),
       ...(options.headers ?? {}),
     },
   });
@@ -26,45 +34,65 @@ async function request<T>(
 }
 
 export const api = {
+  setSession: (token: string | null) => {
+    _token = token;
+  },
+
+  // Generic methods
+  get: <T>(path: string, token?: string | null) => 
+    request<T>(path, { method: "GET" }, token),
+  
+  post: <T>(path: string, body: any, token?: string | null) => 
+    request<T>(path, { 
+      method: "POST", 
+      body: JSON.stringify(body) 
+    }, token),
+  
+  put: <T>(path: string, body: any, token?: string | null) => 
+    request<T>(path, { 
+      method: "PUT", 
+      body: JSON.stringify(body) 
+    }, token),
+  
+  patch: <T>(path: string, body: any, token?: string | null) => 
+    request<T>(path, { 
+      method: "PATCH", 
+      body: JSON.stringify(body) 
+    }, token),
+  
+  delete: <T>(path: string, token?: string | null) => 
+    request<T>(path, { method: "DELETE" }, token),
+
+  // Specific methods
   register: (input: { name: string; email: string; password: string }) =>
-    request<AuthResponse>("/auth/register", {
-      method: "POST",
-      body: JSON.stringify(input),
-    }),
+    api.post<AuthResponse>("/auth/register", input),
+  
   login: (input: { email: string; password: string }) =>
-    request<AuthResponse>("/auth/login", {
-      method: "POST",
-      body: JSON.stringify(input),
-    }),
-  listWorkflows: (token: string) => request<WorkflowRecord[]>("/workflows", {}, token),
+    api.post<AuthResponse>("/auth/login", input),
+  
+  listWorkflows: (token?: string | null) => 
+    api.get<WorkflowRecord[]>("/workflows", token),
+  
   saveWorkflow: (
-    token: string,
+    token: string | null | undefined,
     input: { name: string; description: string; nodes: unknown[]; edges: unknown[] }
   ) =>
-    request<WorkflowRecord>("/workflows", {
-      method: "POST",
-      body: JSON.stringify(input),
-    }, token),
+    api.post<WorkflowRecord>("/workflows", input, token),
+  
   updateWorkflow: (
-    token: string,
+    token: string | null | undefined,
     id: string,
     input: { name: string; description: string; nodes: unknown[]; edges: unknown[] }
   ) =>
-    request<WorkflowRecord>(`/workflows/${id}`, {
-      method: "PUT",
-      body: JSON.stringify(input),
-    }, token),
+    api.put<WorkflowRecord>(`/workflows/${id}`, input, token),
+  
   executeWorkflow: (
-    token: string,
+    token: string | null | undefined,
     input: { name: string; description: string; nodes: unknown[]; edges: unknown[] }
   ) =>
-    request<ExecutionResponse>("/workflows/execute", {
-      method: "POST",
-      body: JSON.stringify(input),
-    }, token),
-  deleteWorkflow: (token: string, id: string) =>
-    request<{ message: string }>(`/workflows/${id}`, {
-      method: "DELETE",
-    }, token),
+    api.post<ExecutionResponse>("/workflows/execute", input, token),
+  
+  deleteWorkflow: (token: string | null | undefined, id: string) =>
+    api.delete<{ message: string }>(`/workflows/${id}`, token),
 };
 

@@ -40,6 +40,9 @@ export default function HomePage() {
   useEffect(() => {
     const storedToken = getStoredToken();
     const storedUser = getStoredUser();
+    if (storedToken) {
+      api.setSession(storedToken);
+    }
     setToken(storedToken ?? null);
     setUser(storedUser);
   }, []);
@@ -50,25 +53,31 @@ export default function HomePage() {
     email: string;
     password: string;
   }) {
-    const response =
-      input.mode === "register"
-        ? await api.register({
-            name: input.name,
-            email: input.email,
-            password: input.password,
-          })
-        : await api.login({
-            email: input.email,
-            password: input.password,
-          });
+    try {
+      const response =
+        input.mode === "register"
+          ? await api.register({
+              name: input.name,
+              email: input.email,
+              password: input.password,
+            })
+          : await api.login({
+              email: input.email,
+              password: input.password,
+            });
 
-    setStoredAuth(response.token, response.user);
-    setToken(response.token);
-    setUser(response.user);
-    setShowAuth(false);
-    toast.success(
-      input.mode === "register" ? "Workspace created!" : "Welcome back!"
-    );
+      setStoredAuth(response.token, response.user);
+      api.setSession(response.token); // Also set the session in the api object
+      setToken(response.token);
+      setUser(response.user);
+      setShowAuth(false);
+      toast.success(
+        input.mode === "register" ? "Workspace created!" : "Welcome back!"
+      );
+    } catch (err) {
+      toast.error(err instanceof Error ? err.message : "Authentication failed");
+      console.error("Auth error:", err);
+    }
   }
 
   // Still hydrating — show skeleton to avoid flicker

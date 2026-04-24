@@ -138,16 +138,20 @@ export function Inspector({ isOpen, node, onChange, onDeleteNode, onClose }: Ins
                       onChange={(v) => onChange(node.id, { url: v })}
                     />
                     <div className="block space-y-1.5">
-                      <label className="text-sm font-medium text-slate-700">Method</label>
+                      <label className="text-sm font-medium text-slate-700">Request Method</label>
                       <select
+                        key="api-method-select"
                         value={node.data.method ?? "GET"}
                         onChange={(e) =>
-                          onChange(node.id, { method: e.target.value as "GET" | "POST" })
+                          onChange(node.id, { method: e.target.value as any })
                         }
                         className="w-full rounded-xl border border-slate-200 bg-white px-4 py-2.5 text-sm text-slate-900 outline-none transition focus:border-brand-400 focus:ring-2 focus:ring-brand-100"
                       >
                         <option value="GET">GET</option>
                         <option value="POST">POST</option>
+                        <option value="PUT">PUT</option>
+                        <option value="PATCH">PATCH</option>
+                        <option value="DELETE">DELETE</option>
                       </select>
                     </div>
                     <TextAreaField

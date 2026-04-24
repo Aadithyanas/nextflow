@@ -514,6 +514,9 @@ function BuilderInner({ token, user }: BuilderShellProps) {
                 fitView
                 fitViewOptions={{ padding: 0.2 }}
                 proOptions={{ hideAttribution: true }}
+                panOnDrag={true}
+                panOnScroll={true}
+                selectionOnDrag={false}
               >
                 <Background
                   variant={BackgroundVariant.Dots}
@@ -528,6 +531,8 @@ function BuilderInner({ token, user }: BuilderShellProps) {
                 <MiniMap
                   nodeColor={miniMapColor}
                   nodeStrokeWidth={0}
+                  pannable
+                  zoomable
                   className="!rounded-2xl !border !border-slate-200"
                   style={{ height: 100, width: 150 }}
                 />

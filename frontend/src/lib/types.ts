@@ -14,7 +14,7 @@ export interface WorkflowNodeData {
   prompt?: string;
   model?: string;
   url?: string;
-  method?: "GET" | "POST";
+  method?: "GET" | "POST" | "PUT" | "PATCH" | "DELETE";
   headers?: Record<string, string>;
   bodyTemplate?: string;
   key?: string;
