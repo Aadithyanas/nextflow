@@ -11,35 +11,34 @@ export function LandingPage({ onLoginClick }: LandingPageProps) {
   const [isYearly, setIsYearly] = useState(false);
 
   return (
-    <div className="relative min-h-screen w-full overflow-hidden bg-[#0A0A0B] text-white selection:bg-brand-500/30">
+    <div className="relative min-h-screen w-full overflow-hidden bg-[#FAF9F6] text-slate-900 selection:bg-brand-500/10">
       
-      {/* ── Background Elements ── */}
-      {/* Subtle radial gradient to illuminate center */}
-      <div className="pointer-events-none absolute left-1/2 top-1/2 -z-10 h-[800px] w-[800px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-brand-500/10 blur-[120px]" />
+      {/* Soft brand illumination */}
+      <div className="pointer-events-none absolute left-1/2 top-1/2 -z-10 h-[800px] w-[800px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-brand-500/[0.05] blur-[120px]" />
       
       {/* Navbar */}
       <nav className="absolute left-0 right-0 top-0 z-50 flex items-center justify-between px-6 py-6 md:px-12">
         <div className="flex items-center gap-3">
-          <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-white/10 shadow-[0_0_15px_rgba(255,255,255,0.05)] backdrop-blur-md border border-white/5">
-            <svg className="h-5 w-5 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round">
+          <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-white shadow-[0_8px_20px_rgba(0,0,0,0.04)] border border-slate-200">
+            <svg className="h-5 w-5 text-brand-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.5} strokeLinecap="round" strokeLinejoin="round">
               <path d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
             </svg>
           </div>
-          <span className="text-xl font-bold tracking-tight text-white">Nextflow</span>
+          <span className="text-xl font-bold tracking-tight text-slate-900">Nextflow</span>
         </div>
         
         <div className="flex items-center gap-6">
           <button 
             type="button" 
             onClick={onLoginClick} 
-            className="text-sm font-medium text-white/70 transition hover:text-white"
+            className="text-sm font-semibold text-slate-500 transition hover:text-slate-900"
           >
             Log In
           </button>
           <button
             type="button"
             onClick={onLoginClick}
-            className="rounded-full bg-white px-5 py-2.5 text-sm font-semibold text-black transition-all hover:scale-105 hover:bg-white/90 shadow-[0_0_20px_rgba(255,255,255,0.2)]"
+            className="rounded-full bg-slate-900 px-5 py-2.5 text-sm font-bold text-white transition-all hover:scale-105 hover:bg-black shadow-[0_10px_25px_rgba(0,0,0,0.1)]"
           >
             Start Building
           </button>
@@ -54,9 +53,9 @@ export function LandingPage({ onLoginClick }: LandingPageProps) {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-          className="mb-8 hidden sm:inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1.5 text-xs font-semibold text-white/70 backdrop-blur-md"
+          className="mb-8 hidden sm:inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white px-3 py-1.5 text-xs font-bold text-slate-600 shadow-sm"
         >
-          <span className="flex h-2 w-2 rounded-full bg-brand-400 shadow-[0_0_10px_#38bdf8]" />
+          <span className="flex h-2 w-2 rounded-full bg-brand-500 shadow-[0_0_10px_rgba(59,130,246,0.4)]" />
           Powered by Gemini 2.5 Flash
         </motion.div>
 
@@ -65,11 +64,11 @@ export function LandingPage({ onLoginClick }: LandingPageProps) {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
-          className="max-w-[1000px] text-5xl font-extrabold tracking-tight text-white sm:text-7xl md:text-8xl"
-          style={{ lineHeight: 1.1 }}
+          className="max-w-[1200px] text-7xl font-black tracking-tighter text-slate-900 sm:text-9xl md:text-[10rem]"
+          style={{ lineHeight: 0.9 }}
         >
           Visual AI <br />
-          <span className="bg-gradient-to-r from-brand-300 via-white to-brand-300 bg-clip-text text-transparent opacity-90 blur-[0.3px]">
+          <span className="bg-gradient-to-r from-brand-600 via-slate-900 to-brand-600 bg-clip-text text-transparent opacity-95">
             in real-time.
           </span>
         </motion.h1>
@@ -78,7 +77,7 @@ export function LandingPage({ onLoginClick }: LandingPageProps) {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
-          className="mx-auto mt-8 max-w-[600px] text-lg font-medium text-white/50 sm:text-xl"
+          className="mx-auto mt-12 max-w-[800px] text-lg font-medium text-slate-500 sm:text-xl md:text-2xl"
         >
           Design, connect, and execute multi-node AI workflows in a stunning drag-and-drop canvas. 
           No terminal required.
@@ -92,10 +91,10 @@ export function LandingPage({ onLoginClick }: LandingPageProps) {
         >
           <button
             onClick={onLoginClick}
-            className="group flex items-center justify-center gap-2 rounded-full bg-white px-8 py-4 text-base font-bold text-black shadow-[0_0_30px_rgba(255,255,255,0.2)] transition-all hover:scale-[1.02] hover:bg-white/90 hover:shadow-[0_0_40px_rgba(255,255,255,0.3)]"
+            className="group flex items-center justify-center gap-2 rounded-full bg-slate-900 px-8 py-4 text-base font-bold text-white shadow-[0_15px_30px_rgba(0,0,0,0.15)] transition-all hover:scale-[1.02] hover:bg-black hover:shadow-[0_20px_40px_rgba(0,0,0,0.2)]"
           >
             Open Canvas
-            <svg className="h-4 w-4 transition-transform group-hover:translate-x-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2}>
+            <svg className="h-4 w-4 transition-transform group-hover:translate-x-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.5}>
               <path d="M5 12h14M12 5l7 7-7 7" />
             </svg>
           </button>
@@ -109,7 +108,7 @@ export function LandingPage({ onLoginClick }: LandingPageProps) {
           className="relative mt-16 h-[500px] w-full max-w-[1000px] hidden md:block" // Hidden on very small screens for cleanliness, but complex on desktop
         >
           {/* Multiple complex connecting lines */}
-          <svg className="absolute left-0 top-0 -z-10 h-full w-full overflow-visible opacity-[0.25]" viewBox="0 0 1000 500">
+          <svg className="absolute left-0 top-0 -z-10 h-full w-full overflow-visible opacity-[0.4]" viewBox="0 0 1000 500">
             <defs>
               <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="0%">
                 <stop offset="0%" stopColor="#10b981" />
@@ -205,17 +204,17 @@ export function LandingPage({ onLoginClick }: LandingPageProps) {
       {/* ── Marquee Section ── */}
       <div className="relative z-10 mx-auto w-full max-w-[1200px] border-t border-white/5 pt-20 pb-10">
         <div className="px-6 md:px-12 mb-12">
-           <h2 className="text-4xl font-extrabold tracking-tight text-white md:text-5xl max-w-2xl">
+           <h2 className="text-4xl font-extrabold tracking-tight text-slate-900 md:text-5xl max-w-2xl">
              The industry's best AI models.<br/>
-             <span className="text-white/50">In one single workflow.</span>
+             <span className="text-slate-400">In one single workflow.</span>
            </h2>
         </div>
         
         {/* Infinite Scroll Container */}
-        <div className="relative flex w-full overflow-hidden bg-black/20 py-8">
+        <div className="relative flex w-full overflow-hidden bg-slate-900/[0.02] py-8">
            {/* Fade overlay masks */}
-           <div className="absolute top-0 bottom-0 left-0 w-32 bg-gradient-to-r from-[#0A0A0B] to-transparent z-10" />
-           <div className="absolute top-0 bottom-0 right-0 w-32 bg-gradient-to-l from-[#0A0A0B] to-transparent z-10" />
+           <div className="absolute top-0 bottom-0 left-0 w-32 bg-gradient-to-r from-[#FAF9F6] to-transparent z-10" />
+           <div className="absolute top-0 bottom-0 right-0 w-32 bg-gradient-to-l from-[#FAF9F6] to-transparent z-10" />
            
            <div className="flex animate-marquee min-w-max items-center gap-20 px-10">
               <MarqueeItem icon="✧" name="Gemini 2.5 Flash" />
@@ -250,11 +249,11 @@ export function LandingPage({ onLoginClick }: LandingPageProps) {
             transition={{ duration: 0.6 }}
             className="group relative col-span-1 overflow-hidden rounded-[24px] bg-slate-900 shadow-2xl md:col-span-2"
           >
-            <img src="/landing/instant_execution.png" alt="Speed" className="absolute inset-0 h-full w-full object-cover opacity-60 transition-transform duration-700 group-hover:scale-105" />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent" />
+            <img src="/landing/instant_execution.png" alt="Speed" className="absolute inset-0 h-full w-full object-cover opacity-80 transition-transform duration-700 group-hover:scale-105" />
+            <div className="absolute inset-0 bg-gradient-to-t from-slate-900/90 via-slate-900/20 to-transparent" />
             <div className="relative h-full flex flex-col justify-end p-8">
               <h3 className="text-3xl font-extrabold tracking-tight text-white sm:text-4xl">Instant execution</h3>
-              <p className="mt-2 text-sm font-medium text-white/70">Warp speed node execution engine</p>
+              <p className="mt-2 text-sm font-medium text-white/80">Warp speed node execution engine</p>
             </div>
           </motion.div>
 
@@ -264,10 +263,10 @@ export function LandingPage({ onLoginClick }: LandingPageProps) {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.1 }}
-            className="flex flex-col items-center justify-center rounded-[24px] bg-[#111113] p-8 text-center border border-white/5 shadow-2xl"
+            className="flex flex-col items-center justify-center rounded-[24px] bg-white p-8 text-center border border-slate-200 shadow-sm"
           >
-             <h3 className="text-6xl font-extrabold tracking-tighter text-white">2.5</h3>
-             <p className="mt-2 font-semibold text-white/60">Gemini Flash</p>
+             <h3 className="text-6xl font-extrabold tracking-tighter text-slate-900">2.5</h3>
+             <p className="mt-2 font-bold text-slate-400">Gemini Flash</p>
           </motion.div>
 
           {/* R1: Sync Box */}
@@ -276,10 +275,10 @@ export function LandingPage({ onLoginClick }: LandingPageProps) {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className="flex flex-col items-center justify-center rounded-[24px] bg-[#111113] p-8 text-center border border-white/5 shadow-2xl"
+            className="flex flex-col items-center justify-center rounded-[24px] bg-white p-8 text-center border border-slate-200 shadow-sm"
           >
-             <h3 className="text-5xl font-extrabold tracking-tighter text-white">Sync</h3>
-             <p className="mt-2 font-semibold text-white/60">Saved workflows</p>
+             <h3 className="text-5xl font-extrabold tracking-tighter text-slate-900">Sync</h3>
+             <p className="mt-2 font-bold text-slate-400">Saved workflows</p>
           </motion.div>
 
           {/* R2: Eye */}
@@ -290,11 +289,11 @@ export function LandingPage({ onLoginClick }: LandingPageProps) {
             transition={{ duration: 0.6 }}
             className="group relative col-span-1 overflow-hidden rounded-[24px] bg-slate-900 shadow-2xl"
           >
-            <img src="/landing/gemini_engine.png" alt="AI Agent" className="absolute inset-0 h-full w-full object-cover opacity-60 transition-transform duration-700 group-hover:scale-105" />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent" />
+            <img src="/landing/gemini_engine.png" alt="AI Agent" className="absolute inset-0 h-full w-full object-cover opacity-80 transition-transform duration-700 group-hover:scale-105" />
+            <div className="absolute inset-0 bg-gradient-to-t from-slate-900/90 via-slate-900/20 to-transparent" />
             <div className="relative h-full flex flex-col items-center justify-center p-6 text-center">
               <h3 className="text-4xl font-extrabold tracking-tight text-white">Agentic</h3>
-              <p className="mt-1 text-sm font-semibold text-white/70">Neural capabilities</p>
+              <p className="mt-1 text-sm font-bold text-white/80">Neural capabilities</p>
             </div>
           </motion.div>
 
@@ -306,11 +305,11 @@ export function LandingPage({ onLoginClick }: LandingPageProps) {
             transition={{ duration: 0.6, delay: 0.1 }}
             className="group relative col-span-1 row-span-2 overflow-hidden rounded-[24px] bg-slate-900 shadow-2xl md:col-span-2"
           >
-            <img src="/landing/visual_canvas.png" alt="Canvas" className="absolute inset-0 h-full w-full object-cover opacity-60 transition-transform duration-700 group-hover:scale-105" />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-transparent to-black/40" />
+            <img src="/landing/visual_canvas.png" alt="Canvas" className="absolute inset-0 h-full w-full object-cover opacity-80 transition-transform duration-700 group-hover:scale-105" />
+            <div className="absolute inset-0 bg-gradient-to-t from-slate-900/90 via-transparent to-slate-900/40" />
             <div className="relative h-full flex flex-col items-center justify-center p-8 text-center">
                <h3 className="text-6xl font-extrabold tracking-tighter text-white sm:text-7xl">Canvas</h3>
-               <p className="absolute bottom-8 left-0 right-0 font-medium text-white/60">The infinite spatial visualizer</p>
+               <p className="absolute bottom-8 left-0 right-0 font-bold text-white/80">The infinite spatial visualizer</p>
             </div>
           </motion.div>
 
@@ -322,13 +321,13 @@ export function LandingPage({ onLoginClick }: LandingPageProps) {
             transition={{ duration: 0.6, delay: 0.2 }}
             className="col-span-1 flex flex-col gap-4"
           >
-             <div className="flex flex-1 flex-col items-center justify-center rounded-[24px] bg-[#111113] p-6 text-center border border-white/5 shadow-2xl">
-               <h3 className="text-2xl font-bold text-white">Local</h3>
-               <p className="mt-1 text-xs font-semibold text-white/50">Run in browser</p>
+             <div className="flex flex-1 flex-col items-center justify-center rounded-[24px] bg-white p-6 text-center border border-slate-200 shadow-sm">
+               <h3 className="text-2xl font-bold text-slate-900">Local</h3>
+               <p className="mt-1 text-xs font-bold text-slate-400">Run in browser</p>
              </div>
-             <div className="flex flex-1 flex-col items-center justify-center rounded-[24px] bg-brand-500 text-white shadow-2xl shadow-brand-500/20">
+             <div className="flex flex-1 flex-col items-center justify-center rounded-[24px] bg-brand-600 text-white shadow-xl shadow-brand-600/20">
                <h3 className="text-5xl font-extrabold">∞</h3>
-               <p className="mt-1 text-xs font-semibold text-white/80">Endless nodes</p>
+               <p className="mt-1 text-xs font-bold text-white/80">Endless nodes</p>
              </div>
           </motion.div>
 
@@ -340,8 +339,8 @@ export function LandingPage({ onLoginClick }: LandingPageProps) {
             transition={{ duration: 0.6 }}
             className="group relative col-span-1 overflow-hidden rounded-[24px] bg-slate-900 shadow-2xl"
           >
-             <img src="/landing/minimalist_ui.png" alt="Minimal" className="absolute inset-0 h-full w-full object-cover opacity-60 transition-transform duration-700 group-hover:scale-105" />
-             <div className="absolute inset-0 bg-gradient-to-t from-black/90 to-transparent" />
+             <img src="/landing/minimalist_ui.png" alt="Minimal" className="absolute inset-0 h-full w-full object-cover opacity-80 transition-transform duration-700 group-hover:scale-105" />
+             <div className="absolute inset-0 bg-gradient-to-t from-slate-900/90 to-transparent" />
              <div className="relative h-full flex flex-col justify-end p-6">
                 <h3 className="text-2xl font-bold tracking-tight text-white">Minimalist UI</h3>
              </div>
@@ -353,39 +352,39 @@ export function LandingPage({ onLoginClick }: LandingPageProps) {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className="col-span-1 flex flex-col items-center justify-center rounded-[24px] bg-[#111113] p-6 text-center border border-white/5 shadow-2xl"
+            className="col-span-1 flex flex-col items-center justify-center rounded-[24px] bg-white p-6 text-center border border-slate-200 shadow-sm"
           >
-             <h3 className="text-3xl font-extrabold text-white">REST</h3>
-             <p className="mt-2 text-sm font-medium text-white/50">Full API integration</p>
+             <h3 className="text-3xl font-extrabold text-slate-900">REST</h3>
+             <p className="mt-2 text-sm font-bold text-slate-400">Full API integration</p>
           </motion.div>
         </div>
       </div>
 
       {/* ── Pricing Section ── */}
-      <div className="relative z-10 mx-auto w-full max-w-[1200px] border-t border-white/5 px-6 py-24 md:px-12">
+      <div className="relative z-10 mx-auto w-full max-w-[1200px] border-t border-slate-100 px-6 py-24 md:px-12">
         <div className="flex flex-col items-center text-center">
-          <h2 className="text-4xl font-extrabold tracking-tight text-white md:text-5xl">
+          <h2 className="text-4xl font-extrabold tracking-tight text-slate-900 md:text-5xl">
             We've got a plan for everybody...
           </h2>
           
           {/* Billing Toggle */}
-          <div className="mt-10 flex items-center justify-center gap-2 rounded-full border border-white/10 bg-white/5 p-1">
+          <div className="mt-10 flex items-center justify-center gap-2 rounded-full border border-slate-200 bg-white p-1.5 shadow-sm">
             <button
               onClick={() => setIsYearly(false)}
-              className={`rounded-full px-6 py-2 text-sm font-semibold transition-colors ${
-                !isYearly ? "bg-white text-black shadow-sm" : "text-white/60 hover:text-white"
+              className={`rounded-full px-6 py-2 text-sm font-bold transition-colors ${
+                !isYearly ? "bg-slate-900 text-white shadow-md" : "text-slate-500 hover:text-slate-900"
               }`}
             >
               Monthly
             </button>
             <button
               onClick={() => setIsYearly(true)}
-              className={`flex items-center gap-2 rounded-full px-6 py-2 text-sm font-semibold transition-colors ${
-                isYearly ? "bg-white text-black shadow-sm" : "text-white/60 hover:text-white"
+              className={`flex items-center gap-2 rounded-full px-6 py-2 text-sm font-bold transition-colors ${
+                isYearly ? "bg-slate-900 text-white shadow-md" : "text-slate-500 hover:text-slate-900"
               }`}
             >
               Yearly
-              <span className={`rounded-md px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider ${isYearly ? "bg-brand-500 text-white" : "bg-brand-500/20 text-brand-400"}`}>
+              <span className={`rounded-md px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider ${isYearly ? "bg-brand-600 text-white" : "bg-brand-100 text-brand-600"}`}>
                 -20% off
               </span>
             </button>
@@ -396,16 +395,16 @@ export function LandingPage({ onLoginClick }: LandingPageProps) {
         <div className="mt-16 grid grid-cols-1 md:grid-cols-4 gap-6">
           
           {/* Free Card */}
-          <div className="flex flex-col rounded-[24px] bg-[#111113] p-8 border border-white/10 shadow-2xl transition hover:border-white/20">
-            <h3 className="text-2xl font-bold text-white">Free</h3>
-            <p className="mt-2 text-sm text-white/50 min-h-[40px]">Get free daily credits to try basic features.</p>
+          <div className="flex flex-col rounded-[24px] bg-white p-8 border border-slate-200 shadow-sm transition hover:border-brand-500/30 hover:shadow-xl hover:shadow-brand-500/[0.05]">
+            <h3 className="text-2xl font-bold text-slate-900">Free</h3>
+            <p className="mt-2 text-sm font-medium text-slate-500 min-h-[40px]">Get free daily credits to try basic features.</p>
             <div className="mt-6 flex items-baseline gap-1">
-              <span className="text-5xl font-extrabold text-white">$0</span>
-              <span className="text-sm font-medium text-white/40">/month</span>
+              <span className="text-5xl font-extrabold text-slate-900">$0</span>
+              <span className="text-sm font-bold text-slate-400">/month</span>
             </div>
-            <div className="mt-4 text-xs font-semibold text-white/70">100 compute units / day</div>
-            <hr className="my-8 border-white/10" />
-            <ul className="flex flex-col gap-4 text-sm text-white/60">
+            <div className="mt-4 text-xs font-bold text-slate-500">100 compute units / day</div>
+            <hr className="my-8 border-slate-100" />
+            <ul className="flex flex-col gap-4 text-sm font-medium text-slate-600">
               <li className="flex items-start gap-3"><PricingCheck /> No credit card required</li>
               <li className="flex items-start gap-3"><PricingCheck /> Full access to real-time models</li>
               <li className="flex items-start gap-3"><PricingCheck /> Limited access to specialized nodes</li>
@@ -413,17 +412,17 @@ export function LandingPage({ onLoginClick }: LandingPageProps) {
           </div>
 
           {/* Basic Card */}
-          <div className="flex flex-col rounded-[24px] bg-[#111113] p-8 border border-white/10 shadow-2xl transition hover:border-white/20">
-            <h3 className="text-2xl font-bold text-white">Basic</h3>
-            <p className="mt-2 text-sm text-white/50 min-h-[40px]">Access our most popular features</p>
+          <div className="flex flex-col rounded-[24px] bg-white p-8 border border-slate-200 shadow-sm transition hover:border-brand-500/30 hover:shadow-xl hover:shadow-brand-500/[0.05]">
+            <h3 className="text-2xl font-bold text-slate-900">Basic</h3>
+            <p className="mt-2 text-sm font-medium text-slate-500 min-h-[40px]">Access our most popular features</p>
             <div className="mt-6 flex items-baseline gap-1">
-              <span className="text-5xl font-extrabold text-white">{isYearly ? "$7" : "$9"}</span>
-              <span className="text-sm font-medium text-white/40">/month</span>
+              <span className="text-5xl font-extrabold text-slate-900">{isYearly ? "$7" : "$9"}</span>
+              <span className="text-sm font-bold text-slate-400">/month</span>
             </div>
-            <div className="mt-4 text-xs font-semibold text-white/70">5,000 compute units / month</div>
-            <hr className="my-8 border-white/10" />
-            <ul className="flex flex-col gap-4 text-sm text-white/60">
-              <li className="flex items-start gap-2 font-bold text-white"><SparklesIcon /> Everything in Free plus:</li>
+            <div className="mt-4 text-xs font-bold text-slate-500">5,000 compute units / month</div>
+            <hr className="my-8 border-slate-100" />
+            <ul className="flex flex-col gap-4 text-sm font-medium text-slate-600">
+              <li className="flex items-start gap-2 font-bold text-slate-900"><SparklesIcon /> Everything in Free plus:</li>
               <li className="flex items-start gap-3"><PricingCheck /> Commercial license</li>
               <li className="flex items-start gap-3"><PricingCheck /> LoRA fine-tuning with 50 images</li>
               <li className="flex items-start gap-3"><PricingCheck /> Upscale & enhance to 4K</li>
@@ -431,20 +430,20 @@ export function LandingPage({ onLoginClick }: LandingPageProps) {
           </div>
 
           {/* Pro Card */}
-          <div className="flex flex-col rounded-[24px] bg-[#111113] p-8 border border-white/10 shadow-2xl transition hover:border-white/20 relative overflow-hidden">
-            <div className="absolute inset-0 bg-brand-500/5 -z-10" />
-            <div className="absolute top-0 right-0 rounded-bl-[16px] bg-brand-500 px-4 py-1.5 text-xs font-bold text-white">Most Popular</div>
+          <div className="flex flex-col rounded-[24px] bg-white p-8 border border-brand-500/20 shadow-xl shadow-brand-500/[0.05] relative overflow-hidden transition hover:border-brand-500/40">
+            <div className="absolute inset-0 bg-brand-500/[0.02] -z-10" />
+            <div className="absolute top-0 right-0 rounded-bl-[16px] bg-brand-600 px-4 py-1.5 text-xs font-bold text-white uppercase tracking-wider">Most Popular</div>
             
-            <h3 className="text-2xl font-bold text-white">Pro</h3>
-            <p className="mt-2 text-sm text-white/50 min-h-[40px]">Advanced features and compute discounts</p>
+            <h3 className="text-2xl font-bold text-slate-900">Pro</h3>
+            <p className="mt-2 text-sm font-medium text-slate-500 min-h-[40px]">Advanced features and compute discounts</p>
             <div className="mt-6 flex items-baseline gap-1">
-              <span className="text-5xl font-extrabold text-white">{isYearly ? "$28" : "$35"}</span>
-              <span className="text-sm font-medium text-white/40">/month</span>
+              <span className="text-5xl font-extrabold text-slate-900">{isYearly ? "$28" : "$35"}</span>
+              <span className="text-sm font-bold text-slate-400">/month</span>
             </div>
-            <div className="mt-4 text-xs font-semibold text-white/70">20,000 compute units / month</div>
-            <hr className="my-8 border-white/10" />
-            <ul className="flex flex-col gap-4 text-sm text-white/60">
-              <li className="flex items-start gap-2 font-bold text-white"><SparklesIcon /> Everything in Basic plus:</li>
+            <div className="mt-4 text-xs font-bold text-slate-500">20,000 compute units / month</div>
+            <hr className="my-8 border-slate-100" />
+            <ul className="flex flex-col gap-4 text-sm font-medium text-slate-600">
+              <li className="flex items-start gap-2 font-bold text-slate-900"><SparklesIcon /> Everything in Basic plus:</li>
               <li className="flex items-start gap-3"><PricingCheck /> Workflow automation with Nodes</li>
               <li className="flex items-start gap-3"><PricingCheck /> AI-powered Nodes Agent</li>
               <li className="flex items-start gap-3"><PricingCheck /> Upscale & enhance to 8K</li>
@@ -452,17 +451,17 @@ export function LandingPage({ onLoginClick }: LandingPageProps) {
           </div>
 
           {/* Max Card */}
-          <div className="flex flex-col rounded-[24px] bg-[#111113] p-8 border border-white/10 shadow-2xl transition hover:border-white/20">
-            <h3 className="text-2xl font-bold text-white">Max</h3>
-            <p className="mt-2 text-sm text-white/50 min-h-[40px]">Full access with massive compute allocation</p>
+          <div className="flex flex-col rounded-[24px] bg-white p-8 border border-slate-200 shadow-sm transition hover:border-brand-500/30 hover:shadow-xl hover:shadow-brand-500/[0.05]">
+            <h3 className="text-2xl font-bold text-slate-900">Max</h3>
+            <p className="mt-2 text-sm font-medium text-slate-500 min-h-[40px]">Full access with massive compute allocation</p>
             <div className="mt-6 flex items-baseline gap-1">
-              <span className="text-5xl font-extrabold text-white">{isYearly ? "$132" : "$165"}</span>
-              <span className="text-sm font-medium text-white/40">/month</span>
+              <span className="text-5xl font-extrabold text-slate-900">{isYearly ? "$132" : "$165"}</span>
+              <span className="text-sm font-bold text-slate-400">/month</span>
             </div>
-            <div className="mt-4 text-xs font-semibold text-white/70">100,000 compute units / month</div>
-            <hr className="my-8 border-white/10" />
-            <ul className="flex flex-col gap-4 text-sm text-white/60">
-              <li className="flex items-start gap-2 font-bold text-white"><SparklesIcon /> Everything in Pro plus:</li>
+            <div className="mt-4 text-xs font-bold text-slate-500">100,000 compute units / month</div>
+            <hr className="my-8 border-slate-100" />
+            <ul className="flex flex-col gap-4 text-sm font-medium text-slate-600">
+              <li className="flex items-start gap-2 font-bold text-slate-900"><SparklesIcon /> Everything in Pro plus:</li>
               <li className="flex items-start gap-3"><PricingCheck /> Unlimited concurrency</li>
               <li className="flex items-start gap-3"><PricingCheck /> Unlimited relaxed generations</li>
               <li className="flex items-start gap-3"><PricingCheck /> Upscale & enhance to 22K</li>
@@ -473,65 +472,65 @@ export function LandingPage({ onLoginClick }: LandingPageProps) {
       </div>
 
       {/* ── Mega Footer ── */}
-      <footer className="relative z-10 w-full border-t border-white/10 bg-[#0A0A0B] pt-20 pb-12">
+      <footer className="relative z-10 w-full border-t border-slate-100 bg-white pt-20 pb-12">
         <div className="mx-auto max-w-[1200px] px-6 md:px-12">
           <div className="grid grid-cols-2 gap-10 md:grid-cols-5 md:gap-8">
             
             {/* Col 1: Brand */}
             <div className="flex flex-col gap-4">
-              <span className="font-bold text-white">Nextflow</span>
-              <a href="#" className="text-sm font-medium text-white/50 hover:text-white transition">Log In</a>
-              <a href="#" className="text-sm font-medium text-white/50 hover:text-white transition">Pricing</a>
-              <a href="#" className="text-sm font-medium text-white/50 hover:text-white transition">Enterprise</a>
-              <a href="#" className="text-sm font-medium text-white/50 hover:text-white transition">Models</a>
+              <span className="font-bold text-slate-900">Nextflow</span>
+              <a href="#" className="text-sm font-bold text-slate-400 hover:text-slate-900 transition">Log In</a>
+              <a href="#" className="text-sm font-bold text-slate-400 hover:text-slate-900 transition">Pricing</a>
+              <a href="#" className="text-sm font-bold text-slate-400 hover:text-slate-900 transition">Enterprise</a>
+              <a href="#" className="text-sm font-bold text-slate-400 hover:text-slate-900 transition">Models</a>
             </div>
 
             {/* Col 2: Products */}
             <div className="flex flex-col gap-4">
-              <span className="font-bold text-white">Products</span>
-              <a href="#" className="text-sm font-medium text-white/50 hover:text-white transition">Flow Builder</a>
-              <a href="#" className="text-sm font-medium text-white/50 hover:text-white transition">AI Agents</a>
-              <a href="#" className="text-sm font-medium text-white/50 hover:text-white transition">Visual Canvas</a>
-              <a href="#" className="text-sm font-medium text-white/50 hover:text-white transition">Code Editor</a>
-              <a href="#" className="text-sm font-medium text-white/50 hover:text-white transition">Integrations</a>
+              <span className="font-bold text-slate-900">Products</span>
+              <a href="#" className="text-sm font-bold text-slate-400 hover:text-slate-900 transition">Flow Builder</a>
+              <a href="#" className="text-sm font-bold text-slate-400 hover:text-slate-900 transition">AI Agents</a>
+              <a href="#" className="text-sm font-bold text-slate-400 hover:text-slate-900 transition">Visual Canvas</a>
+              <a href="#" className="text-sm font-bold text-slate-400 hover:text-slate-900 transition">Code Editor</a>
+              <a href="#" className="text-sm font-bold text-slate-400 hover:text-slate-900 transition">Integrations</a>
             </div>
 
             {/* Col 3: Resources */}
             <div className="flex flex-col gap-4">
-              <span className="font-bold text-white">Resources</span>
-              <a href="#" className="text-sm font-medium text-white/50 hover:text-white transition">Pricing</a>
-              <a href="#" className="text-sm font-medium text-white/50 hover:text-white transition">Careers</a>
-              <a href="#" className="text-sm font-medium text-white/50 hover:text-white transition">Terms of Service</a>
-              <a href="#" className="text-sm font-medium text-white/50 hover:text-white transition">Privacy Policy</a>
-              <a href="#" className="text-sm font-medium text-white/50 hover:text-white transition">Press</a>
-              <a href="#" className="text-sm font-medium text-white/50 hover:text-white transition">API</a>
-              <a href="#" className="text-sm font-medium text-white/50 hover:text-white transition">Documentation</a>
+              <span className="font-bold text-slate-900">Resources</span>
+              <a href="#" className="text-sm font-bold text-slate-400 hover:text-slate-900 transition">Pricing</a>
+              <a href="#" className="text-sm font-bold text-slate-400 hover:text-slate-900 transition">Careers</a>
+              <a href="#" className="text-sm font-bold text-slate-400 hover:text-slate-900 transition">Terms of Service</a>
+              <a href="#" className="text-sm font-bold text-slate-400 hover:text-slate-900 transition">Privacy Policy</a>
+              <a href="#" className="text-sm font-bold text-slate-400 hover:text-slate-900 transition">Press</a>
+              <a href="#" className="text-sm font-bold text-slate-400 hover:text-slate-900 transition">API</a>
+              <a href="#" className="text-sm font-bold text-slate-400 hover:text-slate-900 transition">Documentation</a>
             </div>
 
             {/* Col 4: About */}
             <div className="flex flex-col gap-4">
-              <span className="font-bold text-white">About</span>
-              <a href="#" className="text-sm font-medium text-white/50 hover:text-white transition">Blog</a>
-              <a href="#" className="text-sm font-medium text-white/50 hover:text-white transition">Discord</a>
+              <span className="font-bold text-slate-900">About</span>
+              <a href="#" className="text-sm font-bold text-slate-400 hover:text-slate-900 transition">Blog</a>
+              <a href="#" className="text-sm font-bold text-slate-400 hover:text-slate-900 transition">Discord</a>
             </div>
 
             {/* Col 5: Models */}
             <div className="flex flex-col gap-4">
-              <span className="font-bold text-white">Models</span>
-              <a href="#" className="text-sm font-medium text-white/50 hover:text-white transition">Gemini 2.5</a>
-              <a href="#" className="text-sm font-medium text-white/50 hover:text-white transition">Claude 3.5</a>
-              <a href="#" className="text-sm font-medium text-white/50 hover:text-white transition">GPT-4o</a>
-              <a href="#" className="text-sm font-medium text-white/50 hover:text-white transition">Llama 3</a>
-              <a href="#" className="text-sm font-medium text-white/50 hover:text-white transition">Command R</a>
+              <span className="font-bold text-slate-900">Models</span>
+              <a href="#" className="text-sm font-bold text-slate-400 hover:text-slate-900 transition">Gemini 2.5</a>
+              <a href="#" className="text-sm font-bold text-slate-400 hover:text-slate-900 transition">Claude 3.5</a>
+              <a href="#" className="text-sm font-bold text-slate-400 hover:text-slate-900 transition">GPT-4o</a>
+              <a href="#" className="text-sm font-bold text-slate-400 hover:text-slate-900 transition">Llama 3</a>
+              <a href="#" className="text-sm font-bold text-slate-400 hover:text-slate-900 transition">Command R</a>
             </div>
 
           </div>
 
           {/* Footer Bottom */}
-          <div className="mt-20 flex flex-col items-center justify-between gap-6 border-t border-white/10 pt-8 md:flex-row">
-            <p className="text-sm font-medium text-white/40">© 2026 Nextflow</p>
+          <div className="mt-20 flex flex-col items-center justify-between gap-6 border-t border-slate-100 pt-8 md:flex-row">
+            <p className="text-sm font-bold text-slate-400">© 2026 Nextflow</p>
             
-            <div className="flex gap-6 text-white/40">
+            <div className="flex gap-6 text-slate-400">
               <a href="#" className="hover:text-white transition">
                 <svg className="h-5 w-5" fill="currentColor" viewBox="0 0 24 24"><path d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-1.29 2.213-.669 5.108 1.523 6.574-.806-.026-1.566-.247-2.229-.616-.054 2.281 1.581 4.415 3.949 4.89-.693.188-1.452.232-2.224.084.626 1.956 2.444 3.379 4.6 3.419-2.07 1.623-4.678 2.348-7.29 2.04 2.179 1.397 4.768 2.212 7.548 2.212 9.142 0 14.307-7.721 13.995-14.646.962-.695 1.797-1.562 2.457-2.549z"/></svg>
               </a>
@@ -552,13 +551,13 @@ export function LandingPage({ onLoginClick }: LandingPageProps) {
 {/* Micro component strictly for the visual landing page illusion */}
 function MockNode({ type, label, borderColor, glow }: { type: string; label: string; borderColor: string; glow: string }) {
   return (
-    <div className={`w-[240px] rounded-[24px] border border-white/10 bg-black/60 p-4 backdrop-blur-xl ${glow}`}>
-      <div className={`rounded-[16px] border-[1.5px] bg-white/5 px-4 py-3 ${borderColor}`}>
-        <div className="text-[10px] font-bold uppercase tracking-[0.2em] text-white/50">{type}</div>
-        <div className="mt-1 truncate text-sm font-semibold text-white/90">{label}</div>
+    <div className={`w-[240px] rounded-[24px] border border-slate-200 bg-white p-4 shadow-xl ${glow}`}>
+      <div className={`rounded-[16px] border-[1.5px] bg-white/50 px-4 py-3 ${borderColor}`}>
+        <div className="text-[10px] font-bold uppercase tracking-[0.2em] text-slate-400">{type}</div>
+        <div className="mt-1 truncate text-sm font-bold text-slate-900">{label}</div>
       </div>
-      <div className="mt-5 flex min-h-[36px] w-full items-center rounded-[18px] border border-white/5 bg-white/5 px-4 py-2">
-        <div className="h-1.5 w-1/2 rounded-full bg-white/20" />
+      <div className="mt-5 flex min-h-[36px] w-full items-center rounded-[18px] border border-slate-100 bg-white/40 px-4 py-2">
+        <div className="h-1.5 w-1/2 rounded-full bg-slate-200" />
       </div>
     </div>
   );
@@ -566,16 +565,16 @@ function MockNode({ type, label, borderColor, glow }: { type: string; label: str
 
 function MarqueeItem({ icon, name }: { icon: string; name: string }) {
   return (
-    <div className="flex items-center gap-3 text-white/40 grayscale transition-all hover:text-white hover:grayscale-0">
+    <div className="flex items-center gap-3 text-slate-400 transition-all hover:text-slate-900">
        <span className="text-xl">{icon}</span>
-       <span className="text-xl font-semibold tracking-tight">{name}</span>
+       <span className="text-xl font-bold tracking-tight">{name}</span>
     </div>
   );
 }
 
 function PricingCheck() {
   return (
-    <svg className="h-4 w-4 shrink-0 text-white mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}>
+    <svg className="h-4 w-4 shrink-0 text-brand-600 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}>
       <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
     </svg>
   );

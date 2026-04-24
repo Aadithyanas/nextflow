@@ -80,15 +80,15 @@ export default function HomePage() {
   if (!token || !user) {
     if (showAuth) {
       return (
-        <div className="relative min-h-screen w-full overflow-hidden bg-[#0A0A0B]">
-           {/* Dark backdrop matching landing page seamlessly */}
-           <div className="pointer-events-none absolute left-1/2 top-1/2 -z-10 h-[800px] w-[800px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-brand-500/10 blur-[120px]" />
+        <div className="relative min-h-screen w-full overflow-hidden bg-[#FAF9F6]">
+           {/* Soft brand illumination */}
+           <div className="pointer-events-none absolute left-1/2 top-1/2 -z-10 h-[800px] w-[800px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-brand-500/[0.03] blur-[120px]" />
            {/* Back button */}
            <button 
              onClick={() => setShowAuth(false)}
-             className="absolute left-6 top-6 z-50 flex items-center gap-2 text-sm font-medium text-white/50 hover:text-white transition"
+             className="absolute left-6 top-6 z-50 flex items-center gap-2 text-sm font-semibold text-slate-400 hover:text-slate-900 transition"
            >
-             <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round">
+             <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5} strokeLinecap="round" strokeLinejoin="round">
                <polyline points="15 18 9 12 15 6" />
              </svg>
              Back

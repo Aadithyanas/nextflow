@@ -37,21 +37,21 @@ export function AuthPanel({ onSubmit }: AuthPanelProps) {
   }
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-[#0A0A0B] p-4 font-sans">
+    <div className="flex min-h-screen items-center justify-center bg-[#FAF9F6] p-4 font-sans">
       
       {/* The floating card */}
       <motion.div 
         initial={{ opacity: 0, scale: 0.98 }}
         animate={{ opacity: 1, scale: 1 }}
         transition={{ duration: 0.4, ease: "easeOut" }}
-        className="flex w-full max-w-[900px] overflow-hidden rounded-[24px] bg-[#111113] shadow-[0_20px_60px_-15px_rgba(0,0,0,0.7)] border border-white/5 min-h-[500px]"
+        className="flex w-full max-w-[900px] overflow-hidden rounded-[24px] bg-white shadow-[0_20px_50px_-20px_rgba(0,0,0,0.1)] border border-slate-200 min-h-[500px]"
       >
         
         {/* Left Side: Auth Form */}
         <div className="flex w-full flex-col justify-center px-10 py-12 md:w-[45%]">
           
           <div className="mx-auto w-full max-w-[320px]">
-            <h2 className="mb-8 text-center text-3xl font-extrabold tracking-tight text-white leading-tight">
+            <h2 className="mb-8 text-center text-3xl font-extrabold tracking-tight text-slate-900 leading-tight">
               {mode === "register" ? "Sign up to nextflow" : "Welcome back"}
             </h2>
 
@@ -68,14 +68,14 @@ export function AuthPanel({ onSubmit }: AuthPanelProps) {
                     className="relative overflow-hidden"
                   >
                     <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-4">
-                      <UserIcon className="h-5 w-5 text-white/40" />
+                      <UserIcon className="h-5 w-5 text-slate-400" />
                     </div>
                     <input
                       value={name}
                       onChange={(e) => setName(e.target.value)}
                       placeholder="Jane Doe"
                       required
-                      className="w-full rounded-xl border border-white/10 bg-[#0A0A0B] py-3.5 pl-11 pr-4 text-sm text-white placeholder-white/30 outline-none transition focus:border-brand-500 focus:bg-black"
+                      className="w-full rounded-xl border border-slate-200 bg-white/80 py-3.5 pl-11 pr-4 text-sm text-slate-900 placeholder-slate-400 outline-none transition focus:border-brand-500 focus:bg-white focus:ring-4 focus:ring-brand-500/5"
                     />
                   </motion.div>
                 )}
@@ -83,7 +83,7 @@ export function AuthPanel({ onSubmit }: AuthPanelProps) {
 
               <div className="relative">
                 <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-4">
-                  <EnvelopeIcon className="h-5 w-5 text-white/40" />
+                  <EnvelopeIcon className="h-5 w-5 text-slate-400" />
                 </div>
                 <input
                   type="email"
@@ -91,7 +91,7 @@ export function AuthPanel({ onSubmit }: AuthPanelProps) {
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder="Enter your email"
                   required
-                  className="w-full rounded-xl border border-white/10 bg-[#0A0A0B] py-3.5 pl-11 pr-4 text-sm text-white placeholder-white/30 outline-none transition focus:border-brand-500 focus:bg-black"
+                  className="w-full rounded-xl border border-slate-200 bg-white/80 py-3.5 pl-11 pr-4 text-sm text-slate-900 placeholder-slate-400 outline-none transition focus:border-brand-500 focus:bg-white focus:ring-4 focus:ring-brand-500/5"
                 />
               </div>
 
@@ -103,7 +103,7 @@ export function AuthPanel({ onSubmit }: AuthPanelProps) {
                     placeholder="Enter your password"
                     required
                     minLength={6}
-                    className="w-full rounded-xl border border-white/10 bg-[#0A0A0B] py-3.5 px-4 text-sm text-white placeholder-white/30 outline-none transition focus:border-brand-500 focus:bg-black"
+                    className="w-full rounded-xl border border-slate-200 bg-white/80 py-3.5 px-4 text-sm text-slate-900 placeholder-slate-400 outline-none transition focus:border-brand-500 focus:bg-white focus:ring-4 focus:ring-brand-500/5"
                  />
               </div>
 
@@ -116,100 +116,25 @@ export function AuthPanel({ onSubmit }: AuthPanelProps) {
               <button
                 type="submit"
                 disabled={isSubmitting}
-                className="mt-2 flex w-full justify-center rounded-xl bg-blue-600/20 py-3.5 text-sm font-bold text-blue-400 transition active:bg-blue-600/40 disabled:opacity-50"
+                className="mt-2 flex w-full justify-center rounded-xl bg-blue-600 py-3.5 text-sm font-bold text-white shadow-lg shadow-blue-600/20 transition hover:bg-blue-700 active:scale-[0.98] disabled:opacity-50"
               >
                 {isSubmitting ? "Loading..." : "Continue"}
               </button>
             </form>
 
-            <div className="mt-6 text-center text-sm text-white/60">
 
-
-
-
-            +
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+            <div className="mt-6 text-center text-sm text-slate-500">
               {mode === "register" ? "Already have an account? " : "New to Nextflow? "}
-              <button onClick={() => { setMode(mode === "register" ? "login" : "register"); setError(null); }} type="button" className="font-semibold text-blue-400 hover:text-blue-300 transition-colors">
+              <button onClick={() => { setMode(mode === "register" ? "login" : "register"); setError(null); }} type="button" className="font-bold text-blue-600 hover:text-blue-700 transition-colors">
                  {mode === "register" ? "Sign in" : "Sign up"}
               </button>
             </div>
 
-            <div className="mt-8 text-center text-xs text-white/30">
+            <div className="mt-8 text-center text-xs text-slate-400">
               <p>By continuing, you agree to Nextflow's</p>
               <p>
-                <a href="#" className="font-semibold text-white/50 hover:underline">Terms of Use</a> &{" "}
-                <a href="#" className="font-semibold text-white/50 hover:underline">Privacy Policy</a> .
+                <a href="#" className="font-semibold text-slate-500 hover:underline">Terms of Use</a> &{" "}
+                <a href="#" className="font-semibold text-slate-500 hover:underline">Privacy Policy</a> .
               </p>
             </div>
 
@@ -224,8 +149,8 @@ export function AuthPanel({ onSubmit }: AuthPanelProps) {
               className="absolute inset-0 h-full w-full object-cover transition-transform duration-1000 ease-out" 
               draggable={false}
            />
-           {/* Subtle gradient overlay to smoothly blend with the dark left side */}
-           <div className="absolute inset-0 bg-gradient-to-r from-[#111113] via-transparent to-transparent w-24 z-10" />
+           {/* Subtle gradient overlay to smoothly blend with the white left side */}
+           <div className="absolute inset-0 bg-gradient-to-r from-[#FAF9F6] via-transparent to-transparent w-24 z-10" />
         </div>
 
       </motion.div>
